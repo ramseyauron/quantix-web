@@ -43,6 +43,7 @@ export default function Navbar() {
           onMouseLeave={e => (e.currentTarget.style.color = 'rgba(224,224,255,0.7)')}
           >{item}</a>
         ))}
+        <a href="/docs" style={{ color: "rgba(224,224,255,0.7)", textDecoration: "none", fontSize: "0.9rem", fontWeight: 500, fontFamily: "var(--font-exo2)" }}>Docs</a>
         <a href="https://github.com/ramseyauron/quantix" target="_blank" rel="noopener noreferrer"
           style={{
             padding: '0.5rem 1.25rem',
