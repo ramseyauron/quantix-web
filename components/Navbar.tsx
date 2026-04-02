@@ -17,7 +17,7 @@ export default function Navbar() {
       borderBottom: '1px solid rgba(0,255,255,0.1)',
     }}>
       {/* Logo */}
-      <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}>
+      <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}>
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
           <polygon points="16,2 30,26 2,26" stroke="#00FFFF" strokeWidth="2" fill="none"/>
           <polygon points="16,8 25,24 7,24" fill="rgba(0,255,255,0.15)" stroke="#7B61FF" strokeWidth="1"/>
@@ -30,8 +30,13 @@ export default function Navbar() {
 
       {/* Desktop Nav */}
       <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }} className="desktop-nav">
-        {['Technology', 'Tokenomics', 'Network', 'Docs'].map(item => (
-          <a key={item} href={`#${item.toLowerCase()}`} style={{
+        {[
+          { label: 'Technology', href: '/#technology' },
+          { label: 'Tokenomics', href: '/#tokenomics' },
+          { label: 'Network', href: '/#network' },
+          { label: 'Docs', href: '/docs' },
+        ].map(({ label, href }) => (
+          <a key={label} href={href} style={{
             color: 'rgba(224,224,255,0.7)',
             textDecoration: 'none',
             fontSize: '0.9rem',
@@ -41,9 +46,8 @@ export default function Navbar() {
           }}
           onMouseEnter={e => (e.currentTarget.style.color = '#00FFFF')}
           onMouseLeave={e => (e.currentTarget.style.color = 'rgba(224,224,255,0.7)')}
-          >{item}</a>
+          >{label}</a>
         ))}
-        <a href="/docs" style={{ color: "rgba(224,224,255,0.7)", textDecoration: "none", fontSize: "0.9rem", fontWeight: 500, fontFamily: "var(--font-exo2)" }}>Docs</a>
         <a href="https://github.com/ramseyauron/quantix" target="_blank" rel="noopener noreferrer"
           style={{
             padding: '0.5rem 1.25rem',
