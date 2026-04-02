@@ -34,6 +34,7 @@ export default function Navbar() {
           { label: 'Technology', href: '/#technology' },
           { label: 'Tokenomics', href: '/#tokenomics' },
           { label: 'Network', href: '/#network' },
+          { label: 'Whitepaper', href: '/whitepaper' },
           { label: 'Docs', href: '/docs' },
         ].map(({ label, href }) => (
           <a key={label} href={href} style={{
