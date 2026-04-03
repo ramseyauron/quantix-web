@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 export default function Footer() {
   return (
     <footer style={{
@@ -32,12 +33,17 @@ export default function Footer() {
           {/* Links */}
           <div>
             <div style={{ color: '#E0E0FF', fontWeight: 600, fontSize: '0.9rem', marginBottom: '1rem', fontFamily: 'var(--font-heading)', letterSpacing: '0.05em' }}>Protocol</div>
-            {['Technology', 'Tokenomics', 'Network', 'Whitepaper'].map(l => (
-              <div key={l} style={{ marginBottom: '0.6rem' }}>
-                <a href={`#${l.toLowerCase()}`} style={{ color: 'rgba(224,224,255,0.5)', textDecoration: 'none', fontSize: '0.85rem', transition: 'color 0.2s' }}
+            {[
+              { label: 'Technology', href: '#technology' },
+              { label: 'Tokenomics', href: '#tokenomics' },
+              { label: 'Network', href: '#network' },
+              { label: 'Whitepaper', href: '/whitepaper' },
+            ].map(({ label, href }) => (
+              <div key={label} style={{ marginBottom: '0.6rem' }}>
+                <Link href={href} style={{ color: label === 'Whitepaper' ? 'rgba(123,97,255,0.7)' : 'rgba(224,224,255,0.5)', textDecoration: 'none', fontSize: '0.85rem', transition: 'color 0.2s' }}
                   onMouseEnter={e => (e.currentTarget.style.color = '#00FFFF')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(224,224,255,0.5)')}
-                >{l}</a>
+                  onMouseLeave={e => (e.currentTarget.style.color = label === 'Whitepaper' ? 'rgba(123,97,255,0.7)' : 'rgba(224,224,255,0.5)')}
+                >{label}</Link>
               </div>
             ))}
           </div>

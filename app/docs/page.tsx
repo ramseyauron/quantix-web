@@ -520,12 +520,12 @@ go build -o bin/quantix ./src/cli/main.go
           <div className="space-y-4">
             {[
               {
-                phase: 'Phase 1', title: 'Foundation', date: 'Apr–May 2026', status: 'In Progress',
+                phase: 'Phase 1', title: 'Foundation', date: 'Apr–May 2026', status: '✅ COMPLETE',
                 items: ['Real state execution (ExecuteBlock)', 'Persistent account state (LevelDB)', 'Balance validation in mempool', 'CI/CD pipeline', 'Unit test coverage ≥70%'],
                 color: '#00FFFF',
               },
               {
-                phase: 'Phase 2', title: 'Multi-Node Testnet', date: 'May–Jun 2026', status: 'Planned',
+                phase: 'Phase 2', title: 'Multi-Node Testnet', date: 'May–Jun 2026', status: '🔄 IN PROGRESS',
                 items: ['4-validator PBFT consensus', 'Node sync protocol', 'Network partition handling', 'Docker multi-node setup', 'Prometheus + Grafana monitoring'],
                 color: '#7B61FF',
               },
@@ -570,10 +570,13 @@ go build -o bin/quantix ./src/cli/main.go
         {/* Footer nav */}
         <div className="border-t border-white/8 pt-8 flex justify-between items-center">
           <Link href="/" className="text-sm text-cyan-400 hover:underline">← Back to Home</Link>
-          <a href="https://github.com/ramseyauron/quantix" target="_blank" rel="noopener noreferrer"
-            className="text-sm text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-2">
-            Edit on GitHub →
-          </a>
+          <div className="flex items-center gap-6">
+            <Link href="/whitepaper" className="text-sm text-purple-400 hover:text-purple-300 transition-colors">📄 Whitepaper</Link>
+            <a href="https://github.com/ramseyauron/quantix" target="_blank" rel="noopener noreferrer"
+              className="text-sm text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-2">
+              Edit on GitHub →
+            </a>
+          </div>
         </div>
       </main>
     </div>
