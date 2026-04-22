@@ -3,7 +3,7 @@
 **Authors:** Quantix Core Team  
 **Version:** v1.0.0 — April 2026  
 **Contact:** research@qpqb.org  
-**Repository:** https://github.com/qpqb-org/quantix  
+**Repository:** https://github.com/quantix-org
 
 ---
 
@@ -23,17 +23,17 @@ Quantix is implemented in Go 1.24, audited by an independent security firm (Apri
 
 ## Table of Contents
 
-1. Introduction  
-2. Threat Model  
-3. Cryptographic Foundations  
-4. Consensus Mechanism  
-5. Tokenomics  
-6. Network Architecture  
-7. Universal Sovereign Identity Integration  
-8. Security Analysis  
-9. Roadmap  
-10. Conclusion  
-11. References  
+1. Introduction
+2. Threat Model
+3. Cryptographic Foundations
+4. Consensus Mechanism
+5. Tokenomics
+6. Network Architecture
+7. Universal Sovereign Identity Integration
+8. Security Analysis
+9. Roadmap
+10. Conclusion
+11. References
 
 ---
 
@@ -117,7 +117,7 @@ Transaction and block signatures in Quantix use SPHINCS+, standardized by NIST a
 
 SPHINCS+ belongs to the family of hash-based signature schemes, whose security rests on a single assumption: the collision resistance and preimage resistance of the underlying hash function. Unlike lattice-based or code-based schemes, hash-based signatures do not require novel mathematical hardness assumptions—their security reduces to the hardness of inverting a hash function, which is believed to be quantum-resistant (Grover's algorithm provides only a quadratic speedup for preimage search, requiring a 256-bit hash to provide 128-bit post-quantum security).
 
-The key innovation of SPHINCS+ over earlier hash-based schemes (XMSS, LMS) is that it is *stateless*. Stateful hash-based schemes require the signer to track which one-time key pairs have been used, creating operational complexity and catastrophic failure modes if state is lost or replicated. SPHINCS+ uses a hypertree structure—a multi-layer tree of few-time signature schemes (FORS) and Winternitz one-time signatures—that eliminates the state requirement entirely. A signer can generate signatures independently and in parallel without any risk of key reuse.
+The key innovation of SPHINCS+ over earlier hash-based schemes (XMSS, LMS) is that it is _stateless_. Stateful hash-based schemes require the signer to track which one-time key pairs have been used, creating operational complexity and catastrophic failure modes if state is lost or replicated. SPHINCS+ uses a hypertree structure—a multi-layer tree of few-time signature schemes (FORS) and Winternitz one-time signatures—that eliminates the state requirement entirely. A signer can generate signatures independently and in parallel without any risk of key reuse.
 
 **Trade-offs:** SPHINCS+ signatures are larger than ECDSA signatures—approximately 7-49 KB depending on the parameter set, compared to 64 bytes for ECDSA. Quantix uses the SPHINCS+-SHAKE-256f parameter set, which provides 128-bit post-quantum security with a signature size of approximately 49 KB and signing time under 10 milliseconds on modern hardware. The fee model (Section 5.4) accounts for this overhead explicitly, ensuring that the larger signature size does not create an unfair economic burden on users.
 
@@ -127,7 +127,7 @@ The key innovation of SPHINCS+ over earlier hash-based schemes (XMSS, LMS) is th
 
 Peer-to-peer encrypted communication in Quantix uses a hybrid key exchange combining X25519 (classical Diffie-Hellman on Curve25519) and Kyber768 (NIST FIPS 203, ML-KEM), implemented as a dual-encapsulation scheme.
 
-The hybrid approach is deliberate and principled. X25519 provides excellent performance and well-understood classical security (the Decisional Diffie-Hellman assumption on Curve25519). Kyber768 provides post-quantum security based on the Module Learning With Errors (MLWE) problem, which is conjectured to be hard for both classical and quantum adversaries. Combining them means that an adversary must break *both* schemes to compromise the session key—a "belt and suspenders" approach that protects against the possibility that either primitive turns out to be weaker than expected.
+The hybrid approach is deliberate and principled. X25519 provides excellent performance and well-understood classical security (the Decisional Diffie-Hellman assumption on Curve25519). Kyber768 provides post-quantum security based on the Module Learning With Errors (MLWE) problem, which is conjectured to be hard for both classical and quantum adversaries. Combining them means that an adversary must break _both_ schemes to compromise the session key—a "belt and suspenders" approach that protects against the possibility that either primitive turns out to be weaker than expected.
 
 Concretely, during a handshake between two Quantix nodes, both parties perform an X25519 key exchange and a Kyber768 key encapsulation. The resulting shared secrets are combined using a KDF (SHAKE-256), producing a session key that is secure if either X25519 or Kyber768 is secure. This design future-proofs the network: if X25519 falls to a CRQC, Kyber768 continues to protect communications; if Kyber768 is broken by a classical mathematical advance, X25519 continues to provide security.
 
@@ -180,6 +180,7 @@ Quantix uses Practical Byzantine Fault Tolerance (PBFT), introduced by Castro an
 PBFT is a state machine replication protocol designed to tolerate up to f Byzantine (arbitrarily malicious) failures in a system of N = 3f + 1 or more replicas. It provides strong consistency guarantees: once a block is committed by PBFT, it is final—there are no forks, no probabilistic finality, no need to wait for additional confirmations. This deterministic finality is essential for financial applications and identity systems where transaction irreversibility must be guaranteed.
 
 PBFT operates in three phases for each block proposal:
+
 - **Pre-prepare:** The primary (proposer) broadcasts a block proposal with a sequence number and view number.
 - **Prepare:** Validators broadcast prepare messages confirming they have received and validated the proposal.
 - **Commit:** Once a validator has collected a quorum of prepare messages, it broadcasts a commit message. Once a quorum of commit messages is collected, the block is finalized.
@@ -191,6 +192,7 @@ The protocol tolerates up to f = ⌊(N-1)/3⌋ Byzantine validators. With N = 21
 Quantix's active validator set is selected through Proof-of-Stake. The protocol maintains a registered validator pool of up to 100 validators and an active committee of 21 validators per epoch.
 
 **Staking requirements:**
+
 - Minimum stake: 32 QTX
 - Stake is locked for the duration of the epoch; unstaking is processed at epoch boundaries
 - Validators submit a registration transaction including their SPHINCS+ public key, Kyber768 public key, and stake amount
@@ -245,6 +247,7 @@ Epoch duration = 100 slots × 10 seconds/slot = 1,000 seconds ≈ 16.7 minutes
 ```
 
 At each epoch boundary:
+
 1. The VDF computation for the new epoch's randomness is finalized and verified.
 2. New active validators are selected from the registered pool using the fresh randomness.
 3. Pending stake operations (registrations, unstaking requests) are processed.
@@ -262,6 +265,7 @@ The epoch boundary is a clean separation between operational periods, simplifyin
 The native token of the Quantix Protocol is QTX. It serves three functions: staking collateral for validators, payment of transaction fees, and governance participation (in future protocol versions).
 
 **Supply parameters:**
+
 - Maximum supply: 5,000,000,000 QTX (5 billion)
 - Base unit: nQTX (nano-QTX), where 1 QTX = 10^18 nQTX
 - All protocol-internal arithmetic is performed in nQTX to avoid floating-point errors
@@ -286,13 +290,13 @@ This represents approximately 3.15% annual issuance against the maximum supply i
 
 ### 5.3 Token Distribution
 
-| Allocation | Percentage | Amount (QTX) | Vesting |
-|---|---|---|---|
-| Public Sale | 30% | 1,500,000,000 | TGE + 12 months linear |
-| Staking Rewards | 25% | 1,250,000,000 | Emitted via block rewards |
-| Ecosystem Fund | 20% | 1,000,000,000 | 36 months linear, DAO-governed |
-| Core Team | 15% | 750,000,000 | 12-month cliff, 36 months linear |
-| Protocol Reserve | 10% | 500,000,000 | DAO-governed, emergency use |
+| Allocation       | Percentage | Amount (QTX)  | Vesting                          |
+| ---------------- | ---------- | ------------- | -------------------------------- |
+| Public Sale      | 30%        | 1,500,000,000 | TGE + 12 months linear           |
+| Staking Rewards  | 25%        | 1,250,000,000 | Emitted via block rewards        |
+| Ecosystem Fund   | 20%        | 1,000,000,000 | 36 months linear, DAO-governed   |
+| Core Team        | 15%        | 750,000,000   | 12-month cliff, 36 months linear |
+| Protocol Reserve | 10%        | 500,000,000   | DAO-governed, emergency use      |
 
 The staking rewards allocation represents the protocol's commitment to validator sustainability beyond early block reward issuance. As block rewards decline over time (through governance-adjustable parameters), the staking rewards pool provides long-term incentives for network security.
 
@@ -309,6 +313,7 @@ where `gas_used` reflects the computational and storage cost of the transaction,
 **SPHINCS+ overhead accounting:** Because SPHINCS+ signatures are significantly larger than ECDSA signatures (approximately 49 KB vs. 64 bytes), the gas model explicitly accounts for the bandwidth and storage cost of signature verification. The base transaction gas cost includes a SPHINCS+ verification component, ensuring that the economics of the network reflect its actual resource consumption. This prevents the larger signature size from being a hidden tax on users—it is priced transparently.
 
 Transaction fees are split:
+
 - 70% burned (reducing circulating supply)
 - 30% distributed to the block's active validator set
 
@@ -375,11 +380,11 @@ The account model (as opposed to UTXO) stores state as (address → {balance, no
 
 Quantix defines three network environments, each with a distinct Chain ID:
 
-| Environment | Chain ID | Purpose |
-|---|---|---|
-| Mainnet | 7331 | Production network |
-| Testnet | 17331 | Pre-production validator testing |
-| Devnet | 73310 | Local development and protocol research |
+| Environment | Chain ID | Purpose                                 |
+| ----------- | -------- | --------------------------------------- |
+| Mainnet     | 7331     | Production network                      |
+| Testnet     | 17331    | Pre-production validator testing        |
+| Devnet      | 73310    | Local development and protocol research |
 
 Chain IDs are included in transaction signatures, preventing replay attacks across networks: a transaction signed for Devnet cannot be replayed on Mainnet.
 
@@ -440,13 +445,13 @@ The identity registry is planned for deployment in Phase 3 of the roadmap (Secti
 
 Quantix's security against quantum adversaries is grounded in formal hardness reductions where available:
 
-| Component | Hardness Assumption | Quantum Speedup |
-|---|---|---|
-| SPHINCS+ signatures | Hash function preimage resistance | Quadratic (Grover) |
-| Kyber768 key exchange | Module-LWE | None known |
-| SWIFFTX hashing | Worst-case SIVP | None known |
-| libSTARK proofs | Hash function collision resistance | Quadratic (Grover) |
-| VDF randomness | Sequential squaring in class groups | None known |
+| Component             | Hardness Assumption                 | Quantum Speedup    |
+| --------------------- | ----------------------------------- | ------------------ |
+| SPHINCS+ signatures   | Hash function preimage resistance   | Quadratic (Grover) |
+| Kyber768 key exchange | Module-LWE                          | None known         |
+| SWIFFTX hashing       | Worst-case SIVP                     | None known         |
+| libSTARK proofs       | Hash function collision resistance  | Quadratic (Grover) |
+| VDF randomness        | Sequential squaring in class groups | None known         |
 
 For SPHINCS+ and libSTARK, the relevant quantum speedup is Grover's algorithm, which provides a quadratic speedup for unstructured search. This is accounted for in the parameter selection: SPHINCS+-SHAKE-256f provides 128-bit post-quantum security (equivalent to 256-bit classical security against Grover). For SWIFFTX and Kyber768, no quantum speedup is known beyond generic quantum search, and their security reductions to lattice problems (SIVP, MLWE) are believed quantum-resistant.
 
@@ -460,12 +465,12 @@ For SPHINCS+ and libSTARK, the relevant quantum speedup is Grover's algorithm, w
 
 Quantix commissioned an independent security audit completed in April 2026. The audit reviewed the Go 1.24 codebase, cryptographic implementations, consensus logic, and network stack. The audit identified 27 findings across severity levels:
 
-| Severity | Count | Status |
-|---|---|---|
-| Critical | 3 | All resolved |
-| High | 8 | All resolved |
-| Medium | 12 | All resolved |
-| Low/Informational | 4 | All resolved |
+| Severity          | Count | Status       |
+| ----------------- | ----- | ------------ |
+| Critical          | 3     | All resolved |
+| High              | 8     | All resolved |
+| Medium            | 12    | All resolved |
+| Low/Informational | 4     | All resolved |
 
 **Key findings and resolutions:**
 
@@ -489,16 +494,16 @@ The audit identified several areas for ongoing improvement that do not represent
 
 ### 8.4 Comparison: Bitcoin/Ethereum vs. Quantix
 
-| Property | Bitcoin | Ethereum | Quantix |
-|---|---|---|---|
-| Signature scheme | ECDSA (secp256k1) | ECDSA (secp256k1) | SPHINCS+ (NIST FIPS 205) |
-| Key exchange | None (UTXO) | None (account) | Kyber768 + X25519 |
-| Hashing | SHA-256 | Keccak-256 | SWIFFTX (lattice-based) |
-| ZK proofs | None native | SNARKs (trusted setup) | STARKs (no trusted setup) |
-| Randomness | PoW difficulty | RANDAO (last-revealer risk) | VDF-RANDAO (unbiasable) |
-| Quantum resistance | None | Partial (planned) | Full protocol-level |
-| Identity primitive | None | None | USI-native |
-| Post-quantum roadmap | None announced | In research | Deployed |
+| Property             | Bitcoin           | Ethereum                    | Quantix                   |
+| -------------------- | ----------------- | --------------------------- | ------------------------- |
+| Signature scheme     | ECDSA (secp256k1) | ECDSA (secp256k1)           | SPHINCS+ (NIST FIPS 205)  |
+| Key exchange         | None (UTXO)       | None (account)              | Kyber768 + X25519         |
+| Hashing              | SHA-256           | Keccak-256                  | SWIFFTX (lattice-based)   |
+| ZK proofs            | None native       | SNARKs (trusted setup)      | STARKs (no trusted setup) |
+| Randomness           | PoW difficulty    | RANDAO (last-revealer risk) | VDF-RANDAO (unbiasable)   |
+| Quantum resistance   | None              | Partial (planned)           | Full protocol-level       |
+| Identity primitive   | None              | None                        | USI-native                |
+| Post-quantum roadmap | None announced    | In research                 | Deployed                  |
 
 ---
 
@@ -570,30 +575,30 @@ Quantix is built for the world that is coming. We invite validators, developers,
 
 ## 11. References
 
-1. **NIST FIPS 203** — National Institute of Standards and Technology. *Module-Lattice-Based Key-Encapsulation Mechanism Standard (ML-KEM)*. Federal Information Processing Standard 203, August 2024. https://csrc.nist.gov/publications/detail/fips/203/final
+1. **NIST FIPS 203** — National Institute of Standards and Technology. _Module-Lattice-Based Key-Encapsulation Mechanism Standard (ML-KEM)_. Federal Information Processing Standard 203, August 2024. https://csrc.nist.gov/publications/detail/fips/203/final
 
-2. **NIST FIPS 205** — National Institute of Standards and Technology. *Stateless Hash-Based Digital Signature Standard (SLH-DSA)*. Federal Information Processing Standard 205, August 2024. https://csrc.nist.gov/publications/detail/fips/205/final
+2. **NIST FIPS 205** — National Institute of Standards and Technology. _Stateless Hash-Based Digital Signature Standard (SLH-DSA)_. Federal Information Processing Standard 205, August 2024. https://csrc.nist.gov/publications/detail/fips/205/final
 
-3. **SWIFFTX** — Danilo Gligoroski, Rune Steinsmo Ødegård, Marija Mihova, Svein Johan Knapskog, Ljupco Kocarev, and Aleš Drápal. *SWIFFTX: A Proposal for the SHA-3 Competition*. Submission to NIST SHA-3 competition, 2008.
+3. **SWIFFTX** — Danilo Gligoroski, Rune Steinsmo Ødegård, Marija Mihova, Svein Johan Knapskog, Ljupco Kocarev, and Aleš Drápal. _SWIFFTX: A Proposal for the SHA-3 Competition_. Submission to NIST SHA-3 competition, 2008.
 
-4. **libSTARK** — Eli Ben-Sasson, Iddo Bentov, Ynon Horesh, and Michael Riabzev. *Scalable, transparent, and post-quantum secure computational integrity*. IACR Cryptology ePrint Archive, Report 2018/046. https://eprint.iacr.org/2018/046
+4. **libSTARK** — Eli Ben-Sasson, Iddo Bentov, Ynon Horesh, and Michael Riabzev. _Scalable, transparent, and post-quantum secure computational integrity_. IACR Cryptology ePrint Archive, Report 2018/046. https://eprint.iacr.org/2018/046
 
-5. **PBFT** — Miguel Castro and Barbara Liskov. *Practical Byzantine Fault Tolerance*. Proceedings of the Third Symposium on Operating Systems Design and Implementation (OSDI), 1999, pp. 173–186.
+5. **PBFT** — Miguel Castro and Barbara Liskov. _Practical Byzantine Fault Tolerance_. Proceedings of the Third Symposium on Operating Systems Design and Implementation (OSDI), 1999, pp. 173–186.
 
-6. **Wesolowski VDF** — Benjamin Wesolowski. *Efficient Verifiable Delay Functions*. Proceedings of Advances in Cryptology – EUROCRYPT 2019, Lecture Notes in Computer Science vol. 11478, Springer, pp. 379–407. https://eprint.iacr.org/2018/623
+6. **Wesolowski VDF** — Benjamin Wesolowski. _Efficient Verifiable Delay Functions_. Proceedings of Advances in Cryptology – EUROCRYPT 2019, Lecture Notes in Computer Science vol. 11478, Springer, pp. 379–407. https://eprint.iacr.org/2018/623
 
-7. **Shor's Algorithm** — Peter W. Shor. *Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer*. SIAM Journal on Computing, 26(5):1484–1509, 1997.
+7. **Shor's Algorithm** — Peter W. Shor. _Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer_. SIAM Journal on Computing, 26(5):1484–1509, 1997.
 
-8. **CRYSTALS-Kyber** — Roberto Avanzi, Joppe Bos, Léo Ducas, Eike Kiltz, Tancrède Lepoint, Vadim Lyubashevsky, John M. Schanck, Peter Schwabe, Gregor Seiler, and Damien Stehlé. *CRYSTALS-Kyber Algorithm Specifications and Supporting Documentation*. NIST PQC Round 3 Submission, 2021. https://pq-crystals.org/kyber/
+8. **CRYSTALS-Kyber** — Roberto Avanzi, Joppe Bos, Léo Ducas, Eike Kiltz, Tancrède Lepoint, Vadim Lyubashevsky, John M. Schanck, Peter Schwabe, Gregor Seiler, and Damien Stehlé. _CRYSTALS-Kyber Algorithm Specifications and Supporting Documentation_. NIST PQC Round 3 Submission, 2021. https://pq-crystals.org/kyber/
 
-9. **Kusuma (2026)** — Kusuma. *Universal Sovereign Identity (USI): A Post-Quantum Framework for Self-Sovereign Identity*. Quantix Ecosystem Whitepaper v0.0.1, March 2026. Quantix Protocol Research.
+9. **Kusuma (2026)** — Kusuma. _Universal Sovereign Identity (USI): A Post-Quantum Framework for Self-Sovereign Identity_. Quantix Ecosystem Whitepaper v0.0.1, March 2026. Quantix Protocol Research.
 
-10. **Class Group VDFs** — Lior Rotem and Gil Segev. *Generically Speeding-Up Repeated Squaring is Equivalent to Factoring: Sharp Thresholds for All Cryptographic Relevant Exponents*. Proceedings of Advances in Cryptology – CRYPTO 2020.
+10. **Class Group VDFs** — Lior Rotem and Gil Segev. _Generically Speeding-Up Repeated Squaring is Equivalent to Factoring: Sharp Thresholds for All Cryptographic Relevant Exponents_. Proceedings of Advances in Cryptology – CRYPTO 2020.
 
-11. **SPHINCS+** — Jean-Philippe Aumasson, Daniel J. Bernstein, Ward Beullens, Christoph Dobraunig, Maria Eichlseder, Scott Fluhrer, Stefan-Lukas Gazdag, Andreas Hülsing, Panos Kampanakis, Stefan Kölbl, Tanja Lange, Martin M. Lauridsen, Florian Mendel, Ruben Niederhagen, Christian Rechberger, Joost Rijneveld, Peter Schwabe, and Bas Westerbaan. *SPHINCS+: Submission to the NIST Post-Quantum Project*, v3.1, 2022. https://sphincs.org/
+11. **SPHINCS+** — Jean-Philippe Aumasson, Daniel J. Bernstein, Ward Beullens, Christoph Dobraunig, Maria Eichlseder, Scott Fluhrer, Stefan-Lukas Gazdag, Andreas Hülsing, Panos Kampanakis, Stefan Kölbl, Tanja Lange, Martin M. Lauridsen, Florian Mendel, Ruben Niederhagen, Christian Rechberger, Joost Rijneveld, Peter Schwabe, and Bas Westerbaan. _SPHINCS+: Submission to the NIST Post-Quantum Project_, v3.1, 2022. https://sphincs.org/
 
 ---
 
-*This document is released under Creative Commons Attribution 4.0 International (CC BY 4.0). You are free to share and adapt this material with appropriate attribution.*
+_This document is released under Creative Commons Attribution 4.0 International (CC BY 4.0). You are free to share and adapt this material with appropriate attribution._
 
-*© 2026 Quantix Core Team. research@qpqb.org*
+_© 2026 Quantix Core Team. research@qpqb.org_

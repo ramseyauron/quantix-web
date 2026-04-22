@@ -97,7 +97,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="https://github.com/ramseyauron/quantix"
+            href="https://github.com/quantix-org"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -203,7 +203,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="https://github.com/ramseyauron/quantix"
+            href="https://github.com/quantix-org"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMenuOpen(false)}
