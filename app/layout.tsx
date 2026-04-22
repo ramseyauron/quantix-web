@@ -26,6 +26,9 @@ export const metadata: Metadata = {
       "Post-quantum cryptography. Mathematically enforced privacy. Built for the AI era.",
     type: "website",
   },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
