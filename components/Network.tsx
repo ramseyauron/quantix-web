@@ -3,7 +3,7 @@ const networks = [
   {
     name: "Mainnet",
     port: 7331,
-    status: "Draft",
+    status: "Planned",
     statusColor: "#00d4ff",
     desc: "Production network. Full SPHINCS+ validation, STARK proofs, and VDF randomness.",
     features: [
@@ -17,7 +17,7 @@ const networks = [
   {
     name: "Testnet",
     port: 17331,
-    status: "Draft",
+    status: "Planned",
     statusColor: "#7b2fff",
     desc: "Staging environment for developers. Mirror of mainnet with test QTX.",
     features: [
