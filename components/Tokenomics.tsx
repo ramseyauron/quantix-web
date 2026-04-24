@@ -1,9 +1,30 @@
 "use client";
 const allocations = [
-  { label: "Public Sale", pct: 85, color: "#00d4ff", amount: "4.25B QTX" },
-  { label: "Ecosystem Fund", pct: 5, color: "#00b4d8", amount: "250M QTX" },
-  { label: "Team & Advisors", pct: 5, color: "#9d4edd", amount: "250M QTX" },
-  { label: "Reserve", pct: 5, color: "#4361ee", amount: "250M QTX" },
+  {
+    label: "Public Sale",
+    pct: 69.22,
+    color: "#00d4ff",
+    amount: "3,461,081,600 QTX",
+  },
+  {
+    label: "Ecosystem Fund",
+    pct: 5,
+    color: "#00b4d8",
+    amount: "250,000,000 QTX",
+  },
+  {
+    label: "Team & Advisors",
+    pct: 5,
+    color: "#9d4edd",
+    amount: "250,000,000 QTX",
+  },
+  { label: "Reserve", pct: 5, color: "#4361ee", amount: "250,000,000 QTX" },
+  {
+    label: "Future Block Rewards",
+    pct: 15.78,
+    color: "#3a0ca3",
+    amount: "788,918,400 QTX",
+  },
 ];
 
 export default function Tokenomics() {
