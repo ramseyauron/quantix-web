@@ -546,11 +546,15 @@ export default function DocsPage() {
                 </h3>
                 <div className="space-y-3">
                   {[
-                    { label: "Public Sale", pct: 30, color: "#00FFFF" },
-                    { label: "Staking Rewards", pct: 25, color: "#7B61FF" },
-                    { label: "Ecosystem Fund", pct: 20, color: "#00b4d8" },
-                    { label: "Team & Advisors", pct: 15, color: "#9d4edd" },
-                    { label: "Reserve", pct: 10, color: "#4361ee" },
+                    { label: "Public Sale", pct: 69.22, color: "#00FFFF" },
+                    {
+                      label: "Future Block Rewards",
+                      pct: 15.78,
+                      color: "#7B61FF",
+                    },
+                    { label: "Ecosystem Fund", pct: 5, color: "#00b4d8" },
+                    { label: "Team & Advisors", pct: 5, color: "#9d4edd" },
+                    { label: "Reserve", pct: 5, color: "#4361ee" },
                   ].map(({ label, pct, color }) => (
                     <div key={label}>
                       <div className="flex justify-between text-xs mb-1">
