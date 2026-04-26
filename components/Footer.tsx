@@ -136,8 +136,55 @@ export default function Footer() {
                   <a
                     href={
                       l === "GitHub"
-                        ? "https://github.com/ramseyauron/quantix"
-                        : "#"
+                        ? "https://github.com/quantix-org"
+                        : l === "Documentation"
+                        ? "/docs"
+                        : l === "Testnet Faucet" ? "#" : "#"
+                    }
+                    style={{
+                      color: "rgba(224,224,255,0.5)",
+                      textDecoration: "none",
+                      fontSize: "0.85rem",
+                      transition: "color 0.2s",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color = "#7B61FF")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = "rgba(224,224,255,0.5)")
+                    }
+                  >
+                    {l}
+                  </a>
+                </div>
+              ),
+            )}
+          </div>
+
+          {/* Socials */}
+          <div>
+            <div
+              style={{
+                color: "#E0E0FF",
+                fontWeight: 600,
+                fontSize: "0.9rem",
+                marginBottom: "1rem",
+                fontFamily: "var(--font-heading)",
+                letterSpacing: "0.05em",
+              }}
+            >
+              Socials
+            </div>
+            {["X", "Telegram"].map(
+              (l) => (
+                <div key={l} style={{ marginBottom: "0.6rem" }}>
+                  <a
+                    href={
+                      l === "X"
+                        ? "https://twitter.com/quantix_org"
+                        : l === "Telegram"
+                        ? "https://t.me/quantixpqb"
+                        : l === "Testnet Faucet" ? "#" : "#"
                     }
                     style={{
                       color: "rgba(224,224,255,0.5)",
@@ -225,6 +272,7 @@ export default function Footer() {
               View on GitHub
             </a>
           </div>
+          
         </div>
 
         <div

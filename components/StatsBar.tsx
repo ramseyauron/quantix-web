@@ -1,10 +1,16 @@
+import { GiMiner } from "react-icons/gi";
+import { IoIosTimer } from "react-icons/io";
+import { PiCoinsFill } from "react-icons/pi";
+import { FaCoins } from "react-icons/fa6";
+import { FaAmericanSignLanguageInterpreting } from "react-icons/fa";
+
 export default function StatsBar() {
   const stats = [
-    { label: 'Block Time', value: '10s', icon: '⚡' },
-    { label: 'Max Supply', value: '5B QTX', icon: '◈' },
-    { label: 'Min Stake', value: '32 QTX', icon: '🔒' },
-    { label: 'Consensus', value: 'PBFT', icon: '⬡' },
-    { label: 'Block Reward', value: '5 QTX', icon: '◆' },
+    { label: 'Block Time', value: '10s', icon: <IoIosTimer size={48} color="#00FFFF"/> },
+    { label: 'Max Supply', value: '5B QTX', icon: <PiCoinsFill size={48} color="#00FFFF"/> },
+    { label: 'Min Stake', value: '32 QTX', icon: <FaCoins size={48} color="#00FFFF"/> },
+    { label: 'Consensus', value: 'PBFT', icon: <FaAmericanSignLanguageInterpreting size={48} color="#00FFFF"/> },
+    { label: 'Block Reward', value: '5 QTX', icon: <GiMiner size={48} color="#00FFFF"/> },
   ]
 
   return (
@@ -23,7 +29,7 @@ export default function StatsBar() {
         gap: '1.5rem',
       }}>
         {stats.map(s => (
-          <div key={s.label} style={{ textAlign: 'center' }}>
+          <div key={s.label} style={{ textAlign: 'center', flex: '1 1 150px', padding: '1rem', background: 'rgba(0,255,255,0.05)', borderRadius: '8px', alignItems: 'center', display: 'flex', flexDirection: 'column'   }}>
             <div style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>{s.icon}</div>
             <div className="stat-number" style={{
               fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
