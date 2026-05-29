@@ -181,7 +181,7 @@ export default function Footer() {
                   <a
                     href={
                       l === "X"
-                        ? "https://x.com/qtxpost"
+                        ? "https://x.com/qpqbpost"
                         : l === "Telegram"
                         ? "https://t.me/quantixpqb"
                         : l === "Testnet Faucet" ? "#" : "#"
