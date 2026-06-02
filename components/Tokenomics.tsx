@@ -81,9 +81,9 @@ export default function Tokenomics() {
           >
             5,000,000,000 QTX total supply — fixed forever
           </p>
-          {/* <p>
-            0xd6968214C3Bb663FB9feefb52B28d4A9Caf953fd
-          </p> */}
+          <p>
+            0xF524C5249Da6e3a16cADe772eeE6E4e8B7606B07
+          </p>
         </div>
 
         <div
