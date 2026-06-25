@@ -181,10 +181,10 @@ export default function Footer() {
                   <a
                     href={
                       l === "X"
-                        ? "https://x.com/qpqbpost"
+                        ? "https://x.com/QuantixPQB"
                         : l === "Telegram"
-                        ? "https://t.me/quantixpqb"
-                        : l === "Testnet Faucet" ? "#" : "#"
+                        ? ""
+                        : "#"
                     }
                     style={{
                       color: "rgba(224,224,255,0.5)",
