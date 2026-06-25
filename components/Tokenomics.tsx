@@ -4,26 +4,26 @@ const allocations = [
     label: "Public Sale",
     pct: 69.22,
     color: "#00d4ff",
-    amount: "3,461,081,600 QTX",
+    amount: "692,200,000 QTX",
   },
   {
     label: "Ecosystem Fund",
     pct: 5,
     color: "#00b4d8",
-    amount: "250,000,000 QTX",
+    amount: "50,000,000 QTX",
   },
   {
     label: "Team & Advisors",
     pct: 5,
     color: "#9d4edd",
-    amount: "250,000,000 QTX",
+    amount: "50,000,000 QTX",
   },
-  { label: "Reserve", pct: 5, color: "#4361ee", amount: "250,000,000 QTX" },
+  { label: "Reserve", pct: 5, color: "#4361ee", amount: "50,000,000 QTX" },
   {
     label: "Future Block Rewards",
     pct: 15.78,
     color: "#3a0ca3",
-    amount: "788,918,400 QTX",
+    amount: "157,800,000 QTX",
   },
 ];
 
@@ -79,11 +79,9 @@ export default function Tokenomics() {
               marginTop: "0.75rem",
             }}
           >
-            5,000,000,000 QTX total supply — fixed forever
+            1,000,000,000 QTX total supply — fixed forever
           </p>
-          <p>
-            0xF524C5249Da6e3a16cADe772eeE6E4e8B7606B07
-          </p>
+
         </div>
 
         <div
@@ -125,7 +123,7 @@ export default function Tokenomics() {
                 fontSize="18"
                 fontWeight="800"
               >
-                5B
+                1B
               </text>
               <text
                 x={cx}

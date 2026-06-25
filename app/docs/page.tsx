@@ -130,7 +130,7 @@ export default function DocsPage() {
                 { label: "Consensus", value: "PBFT + PoS", icon: "⚖️" },
                 { label: "Signature", value: "SPHINCS+", icon: "🔐" },
                 { label: "Symbol", value: "QTX", icon: "◈" },
-                { label: "Max Supply", value: "5 Billion QTX", icon: "💎" },
+                { label: "Max Supply", value: "1 Billion QTX", icon: "💎" },
                 { label: "Chain ID", value: "Devnet: 73310", icon: "🌐" },
               ].map(({ label, value, icon }) => (
                 <div
@@ -529,7 +529,7 @@ export default function DocsPage() {
                     ["Symbol", "QTX"],
                     ["Base Unit", "nQTX (nano-QTX)"],
                     ["Precision", "1 QTX = 10¹⁸ nQTX"],
-                    ["Max Supply", "5,000,000,000 QTX"],
+                    ["Max Supply", "1,000,000,000 QTX"],
                     ["Block Reward", "5 QTX"],
                     ["BIP44 Coin Type", "7331"],
                   ].map(([k, v]) => (

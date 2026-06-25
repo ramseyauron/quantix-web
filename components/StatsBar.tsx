@@ -7,7 +7,7 @@ import { FaAmericanSignLanguageInterpreting } from "react-icons/fa";
 export default function StatsBar() {
   const stats = [
     { label: 'Block Time', value: '10s', icon: <IoIosTimer size={48} color="#00FFFF"/> },
-    { label: 'Max Supply', value: '5B QTX', icon: <PiCoinsFill size={48} color="#00FFFF"/> },
+    { label: 'Max Supply', value: '1B QTX', icon: <PiCoinsFill size={48} color="#00FFFF"/> },
     { label: 'Min Stake', value: '32 QTX', icon: <FaCoins size={48} color="#00FFFF"/> },
     { label: 'Consensus', value: 'PBFT', icon: <FaAmericanSignLanguageInterpreting size={48} color="#00FFFF"/> },
     { label: 'Block Reward', value: '5 QTX', icon: <GiMiner size={48} color="#00FFFF"/> },
